@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_spend/constants/cons_values.dart';
 import 'package:smart_spend/constants/notifier.dart';
@@ -55,6 +56,20 @@ class _SettingsPageState extends State<SettingsPage> {
                     }
                   });
                 },
+              ),
+              ListTile(
+                leading: Text(
+                  "Delete Data",
+                  style: TextStyleDisplay.clear_data_font,
+                ),
+                trailing: ElevatedButton.icon(
+                  onPressed: () {},
+                  label: Icon(FontAwesomeIcons.trash),
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.red),
+                    foregroundColor: WidgetStatePropertyAll(Colors.black),
+                  ),
+                ),
               ),
             ],
           ),

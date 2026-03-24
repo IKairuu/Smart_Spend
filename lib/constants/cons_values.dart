@@ -221,6 +221,11 @@ class TextStyleDisplay {
     fontSize: 20,
     fontWeight: FontWeight.w400,
   );
+  static final TextStyle clear_data_font = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    color: Colors.red,
+  );
   static final TextStyle overall_labels = TextStyle(fontSize: 20);
 }
 
