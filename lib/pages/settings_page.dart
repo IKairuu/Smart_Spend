@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_spend/constants/cons_values.dart';
 import 'package:smart_spend/constants/notifier.dart';
+import 'package:smart_spend/functions/background.dart';
 import 'package:smart_spend/pages/main_page.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -63,7 +65,49 @@ class _SettingsPageState extends State<SettingsPage> {
                   style: TextStyleDisplay.clear_data_font,
                 ),
                 trailing: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text("Clear All Data"),
+                          content: Text(
+                            "Clear Data? All data will be deleted permanently.",
+                          ),
+                          actionsAlignment: MainAxisAlignment.end,
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("No"),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await AppDatabase.clear_expenses_data();
+                                await AppDatabase.clear_memo_data();
+                                expenses_data.value = AppDatabase.get_data();
+                                memos.value = AppDatabase.get_memo_data();
+                                AppDatabase.refresh_data();
+                                AppDatabase.refresh_notifiers();
+                                AppDatabase.calculate_all_display();
+                                AppDatabase.calculate_overall();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MainPage(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Yes",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                        ),
+                        barrierDismissible: true,
+                      );
+                    });
+                  },
                   label: Icon(FontAwesomeIcons.trash),
                   style: ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll(Colors.red),

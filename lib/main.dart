@@ -35,7 +35,6 @@ class _MyAppState extends State<MyApp> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool? temp = prefs.getBool(Settings.dark_mode);
     dark_mode.value = temp ?? false;
-    print(dark_mode.value);
     container_colors.value = dark_mode.value
         ? BoxDecoration(
             color: ColorContainer.main_containers_dark,

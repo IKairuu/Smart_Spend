@@ -33,9 +33,17 @@ class AppDatabase {
     return data;
   }
 
-  static Future<void> clear_data() async {
+  static Future<void> clear_expenses_data() async {
     try {
       await hiveBox.clear();
+    } catch (error) {
+      print("Failed to clear data");
+    }
+  }
+
+  static Future<void> clear_memo_data() async {
+    try {
+      await memoHivebox.clear();
     } catch (error) {
       print("Failed to clear data");
     }
@@ -125,14 +133,6 @@ class AppDatabase {
       await memoHivebox.add(data.create_map());
     } catch (error) {
       print("Error saving the memo: ${error}");
-    }
-  }
-
-  static Future<void> clear_memo_data() async {
-    try {
-      await memoHivebox.clear();
-    } catch (error) {
-      print("Failed to clear data");
     }
   }
 
