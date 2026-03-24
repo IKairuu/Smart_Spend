@@ -14,28 +14,28 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          onPressed: () {
-            setState(() {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MainPage()),
-              );
-            });
-          },
-        ),
-        title: Text("Settings"),
-      ),
-      body: Column(
-        children: [
-          ValueListenableBuilder(
-            valueListenable: dark_mode,
-            builder: (context, mode, child) {
-              return SwitchListTile.adaptive(
+    return ValueListenableBuilder(
+      valueListenable: dark_mode,
+      builder: (context, dark, child) {
+        return Scaffold(
+          appBar: AppBar(
+            leading: BackButton(
+              onPressed: () {
+                setState(() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainPage()),
+                  );
+                });
+              },
+            ),
+            title: Text("Settings"),
+          ),
+          body: Column(
+            children: [
+              SwitchListTile.adaptive(
                 title: Text("Dark Mode", style: TextStyleDisplay.settings_font),
-                value: mode,
+                value: dark,
                 onChanged: (value) async {
                   final SharedPreferences preference =
                       await SharedPreferences.getInstance();
@@ -55,11 +55,11 @@ class _SettingsPageState extends State<SettingsPage> {
                     }
                   });
                 },
-              );
-            },
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
