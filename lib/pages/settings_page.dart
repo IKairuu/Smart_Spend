@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_spend/constants/cons_values.dart';
 import 'package:smart_spend/constants/notifier.dart';
 import 'package:smart_spend/functions/background.dart';
+import 'package:smart_spend/functions/manage_user.dart';
 import 'package:smart_spend/pages/main_page.dart';
+import 'package:smart_spend/pages/welcome_page.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -84,6 +86,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               onPressed: () async {
                                 await AppDatabase.clear_expenses_data();
                                 await AppDatabase.clear_memo_data();
+                                await UserManagement.clear_user_data();
                                 expenses_data.value = AppDatabase.get_data();
                                 memos.value = AppDatabase.get_memo_data();
                                 AppDatabase.refresh_data();
@@ -93,7 +96,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => MainPage(),
+                                    builder: (context) => WelcomePage(),
                                   ),
                                 );
                               },

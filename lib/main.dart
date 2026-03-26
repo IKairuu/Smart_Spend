@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_spend/constants/cons_values.dart';
 import 'package:smart_spend/constants/notifier.dart';
 import 'package:smart_spend/functions/background.dart';
+import 'package:smart_spend/functions/manage_user.dart';
 import 'package:smart_spend/widget_tree.dart';
 import 'package:hive/hive.dart';
 
@@ -28,6 +29,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     get_dark_mode();
+    check_user_sign_in();
     super.initState();
   }
 
@@ -44,6 +46,18 @@ class _MyAppState extends State<MyApp> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
           );
+  }
+
+  void check_user_sign_in() async {
+    user_data.value = await UserManagement.load_user_data();
+    switch (user_data.value) {
+      case null:
+        user_signed_in.value = false;
+        break;
+      default:
+        user_signed_in.value = true;
+        break;
+    }
   }
 
   Widget build(BuildContext context) {

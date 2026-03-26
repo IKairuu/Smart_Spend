@@ -1,15 +1,16 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_spend/constants/notifier.dart';
 
 class UserManagement {
-  Future<void> save_user_data(Map<String, dynamic> data) async {
+  static Future<void> save_user_data(Map<String, dynamic> data) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     String map = json.encode(data);
     await preferences.setString("user_data", map);
   }
 
-  Future<Map<String, dynamic>?> load_user_data() async {
+  static Future<Map<String, dynamic>?> load_user_data() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     String? map = preferences.getString("user_data");
     if (map != null) {
@@ -17,5 +18,12 @@ class UserManagement {
       return user_data;
     }
     return null;
+  }
+
+  static Future<void> clear_user_data() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    user_data.value = null;
+    user_signed_in.value = false;
+    await preferences.remove("user_data");
   }
 }

@@ -8,6 +8,8 @@ import 'package:smart_spend/Objects/overall_stats_object.dart';
 import 'package:smart_spend/constants/cons_values.dart';
 import 'package:smart_spend/Objects/expense_graph.dart';
 
+ValueNotifier<Map<String, dynamic>?> user_data = ValueNotifier(null);
+ValueNotifier<bool> user_signed_in = ValueNotifier(false);
 ValueNotifier<int> current_widget = ValueNotifier(0);
 ValueNotifier<int> current_main_widget = ValueNotifier(0);
 ValueNotifier<int> current_expenses_view = ValueNotifier(0);
