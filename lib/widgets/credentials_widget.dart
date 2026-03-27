@@ -249,7 +249,12 @@ class _CredentialsWidgetState extends State<CredentialsWidget> {
                             await UserManagement.save_user_data(data);
                             user_data.value =
                                 await UserManagement.load_user_data();
-                            user_signed_in.value = false;
+                            setState(() {
+                              user_signed_in.value = false;
+                              overall_balance.value =
+                                  user_data.value![user_data.value!.keys
+                                      .toList()[0]]["balance"];
+                            });
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -282,10 +287,9 @@ class _CredentialsWidgetState extends State<CredentialsWidget> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        current_widget.value = 0;
+                        current_welcome_widget.value = 0;
                       });
                     },
-                    child: Text("Back"),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadiusGeometry.circular(20),
@@ -294,6 +298,7 @@ class _CredentialsWidgetState extends State<CredentialsWidget> {
                       backgroundColor: Color.fromRGBO(103, 80, 164, 1),
                       foregroundColor: Colors.white,
                     ),
+                    child: Text("Back"),
                   ),
                 ],
               ),

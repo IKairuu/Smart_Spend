@@ -405,7 +405,6 @@ class AppDatabase {
   }
 
   static void refresh_notifiers() {
-    overall_balance.value = 0;
     overall_expenses.value = 0;
     overall_income.value = 0;
     net_savings.value = 0;

@@ -247,10 +247,3 @@ class _AddExpensesState extends State<AddExpenses> {
     );
   }
 }
-
-class User {
-  final String label;
-  final String value;
-
-  User({required this.label, required this.value});
-}

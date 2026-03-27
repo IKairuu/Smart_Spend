@@ -34,7 +34,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
               ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    current_widget.value = 1;
+                    current_welcome_widget.value = 1;
                     expenses_data.value = AppDatabase.get_data();
                     memos.value = AppDatabase.get_memo_data();
                     memo_check_data.value =

@@ -7,7 +7,7 @@ import 'package:smart_spend/constants/notifier.dart';
 import 'package:smart_spend/functions/background.dart';
 import 'package:smart_spend/functions/manage_user.dart';
 import 'package:smart_spend/pages/main_page.dart';
-import 'package:smart_spend/pages/welcome_page.dart';
+import 'package:smart_spend/widget_tree.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -87,16 +87,25 @@ class _SettingsPageState extends State<SettingsPage> {
                                 await AppDatabase.clear_expenses_data();
                                 await AppDatabase.clear_memo_data();
                                 await UserManagement.clear_user_data();
-                                expenses_data.value = AppDatabase.get_data();
-                                memos.value = AppDatabase.get_memo_data();
-                                AppDatabase.refresh_data();
-                                AppDatabase.refresh_notifiers();
-                                AppDatabase.calculate_all_display();
-                                AppDatabase.calculate_overall();
+                                setState(() {
+                                  expenses_data.value = AppDatabase.get_data();
+                                  memos.value = AppDatabase.get_memo_data();
+                                  dark_mode.value = false;
+                                  container_colors.value = BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                  );
+                                  current_main_widget.value = 0;
+                                  current_welcome_widget.value = 0;
+                                  AppDatabase.refresh_data();
+                                  AppDatabase.refresh_notifiers();
+                                  AppDatabase.calculate_all_display();
+                                  AppDatabase.calculate_overall();
+                                });
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => WelcomePage(),
+                                    builder: (context) => WidgetTree(),
                                   ),
                                 );
                               },

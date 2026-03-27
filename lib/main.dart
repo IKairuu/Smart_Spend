@@ -50,12 +50,14 @@ class _MyAppState extends State<MyApp> {
 
   void check_user_sign_in() async {
     user_data.value = await UserManagement.load_user_data();
+    String key = user_data.value!.keys.toList()[0];
     switch (user_data.value) {
       case null:
         user_signed_in.value = false;
         break;
       default:
         user_signed_in.value = true;
+        overall_balance.value = user_data.value![key]["balance"];
         break;
     }
   }

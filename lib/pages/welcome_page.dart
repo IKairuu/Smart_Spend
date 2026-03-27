@@ -15,7 +15,7 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: ValueListenableBuilder(
-        valueListenable: current_widget,
+        valueListenable: current_welcome_widget,
         builder: (context, value, child) {
           return Stack(
             children: [
