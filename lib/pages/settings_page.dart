@@ -171,6 +171,84 @@ class _SettingsPageState extends State<SettingsPage> {
                   ],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, bottom: 5, top: 10),
+                child: Text("PROFILE"),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+                child: Container(
+                  width: 500,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    color: dark
+                        ? ColorContainer.setting_section_background
+                        : ColorContainer.stats_main_color,
+                    border: BoxBorder.all(
+                      color: dark
+                          ? ColorContainer.setting_light_color
+                          : ColorContainer.setting_section_background,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 10),
+                        child: Row(
+                          children: [
+                            Icon(Icons.person_pin_rounded),
+                            SizedBox(width: 5),
+                            Text("EDIT PROFILE"),
+                          ],
+                        ),
+                      ),
+                      Divider(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 10),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Name",
+                              style: TextStyleDisplay.settings_profile_labels,
+                            ),
+                            SizedBox(width: 150),
+                            Text(
+                              "Nickname",
+                              style: TextStyleDisplay.settings_profile_labels,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, left: 10),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 150,
+                              height: 30,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 37),
+                            Container(
+                              width: 150,
+                              height: 30,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         );

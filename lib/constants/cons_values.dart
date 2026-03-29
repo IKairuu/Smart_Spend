@@ -227,6 +227,9 @@ class TextStyleDisplay {
     color: Colors.red,
   );
   static final TextStyle overall_labels = TextStyle(fontSize: 20);
+  static final TextStyle settings_profile_labels = TextStyle(
+    fontWeight: FontWeight.w800,
+  );
 }
 
 class ColorContainer {
