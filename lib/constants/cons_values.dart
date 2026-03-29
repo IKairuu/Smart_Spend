@@ -218,11 +218,11 @@ class TextStyleDisplay {
     fontSize: 20,
   );
   static final TextStyle settings_font = TextStyle(
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: FontWeight.w400,
   );
   static final TextStyle clear_data_font = TextStyle(
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: FontWeight.w400,
     color: Colors.red,
   );
@@ -236,4 +236,6 @@ class ColorContainer {
   static final Color stats_main_color = Color.fromRGBO(232, 222, 248, 1);
   static final Color stats_tab_container = Color(0xFFF3E8FF);
   static final Color chat_box = Color.fromRGBO(208, 188, 254, 1);
+  static final Color setting_section_background = Color.fromRGBO(48, 48, 46, 1);
+  static final Color setting_light_color = Color.fromRGBO(250, 250, 250, 1);
 }
