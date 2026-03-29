@@ -227,9 +227,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               width: 150,
                               height: 30,
                               child: TextField(
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                ),
+                                decoration: SettingDesign.text_fields,
                               ),
                             ),
                             SizedBox(width: 37),
@@ -237,13 +235,59 @@ class _SettingsPageState extends State<SettingsPage> {
                               width: 150,
                               height: 30,
                               child: TextField(
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                ),
+                                decoration: SettingDesign.text_fields,
                               ),
                             ),
                           ],
                         ),
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10, left: 10),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Gender",
+                                  style:
+                                      TextStyleDisplay.settings_profile_labels,
+                                ),
+                                SizedBox(width: 150),
+                                Text(
+                                  "Age",
+                                  style:
+                                      TextStyleDisplay.settings_profile_labels,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10, left: 10),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 150,
+                                  height: 30,
+                                  child: TextField(
+                                    decoration: SettingDesign.text_fields,
+                                  ),
+                                ),
+                                SizedBox(width: 37),
+                                Container(
+                                  width: 150,
+                                  height: 30,
+                                  child: TextField(
+                                    decoration: SettingDesign.text_fields,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

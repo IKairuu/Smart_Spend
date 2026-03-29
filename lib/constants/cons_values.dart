@@ -239,6 +239,14 @@ class ColorContainer {
   static final Color stats_main_color = Color.fromRGBO(232, 222, 248, 1);
   static final Color stats_tab_container = Color(0xFFF3E8FF);
   static final Color chat_box = Color.fromRGBO(208, 188, 254, 1);
-  static final Color setting_section_background = Color.fromRGBO(48, 48, 46, 1);
+  static final Color setting_section_background = Color.fromRGBO(38, 38, 36, 1);
   static final Color setting_light_color = Color.fromRGBO(250, 250, 250, 1);
+}
+
+class SettingDesign {
+  static final InputDecoration text_fields = InputDecoration(
+    fillColor: Color.fromRGBO(46, 46, 46, 1),
+    filled: true,
+    border: OutlineInputBorder(),
+  );
 }
