@@ -244,8 +244,10 @@ class ColorContainer {
 }
 
 class SettingDesign {
-  static final InputDecoration text_fields = InputDecoration(
-    fillColor: Color.fromRGBO(46, 46, 46, 1),
+  static InputDecoration text_fields = InputDecoration(
+    fillColor: dark_mode.value
+        ? Color.fromRGBO(46, 46, 46, 1)
+        : ColorContainer.setting_light_color,
     filled: true,
     border: OutlineInputBorder(),
   );
