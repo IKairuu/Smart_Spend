@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_spend/constants/cons_values.dart';
 import 'package:smart_spend/constants/notifier.dart';
+import 'package:smart_spend/functions/background.dart';
 import 'package:smart_spend/functions/manage_user.dart';
 import 'package:smart_spend/pages/main_page.dart';
 
@@ -358,6 +359,7 @@ class _EditProfileState extends State<EditProfile> {
                                               .value![UserManagement.get_user_name(
                                             user_data.value!,
                                           )]["balance"];
+                                      AppDatabase.calculate_overall();
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
