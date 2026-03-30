@@ -233,7 +233,7 @@ class _EditProfileState extends State<EditProfile> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: dark
                             ? ColorContainer.main_containers_indicator
-                            : ColorContainer.setting_light_color,
+                            : ColorContainer.main_containers_light,
                         foregroundColor: dark ? Colors.white : Colors.black,
                       ),
                       onPressed: () {},
