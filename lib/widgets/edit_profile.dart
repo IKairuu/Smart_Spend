@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_spend/constants/cons_values.dart';
 import 'package:smart_spend/constants/notifier.dart';
 import 'package:smart_spend/functions/manage_user.dart';
+import 'package:smart_spend/pages/main_page.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -274,7 +275,116 @@ class _EditProfileState extends State<EditProfile> {
                             : ColorContainer.main_containers_light,
                         foregroundColor: dark ? Colors.white : Colors.black,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (name_controller.text.trim().isEmpty ||
+                            nick_name_controller.text.trim().isEmpty ||
+                            gender_controller.text.trim().isEmpty ||
+                            age_controller.text.trim().isEmpty ||
+                            occupation_controller.text.trim().isEmpty ||
+                            balance_controller.text.trim().isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Invalid Input"),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        } else if (name_controller.text ==
+                                UserManagement.get_user_name(
+                                  user_data.value!,
+                                ) &&
+                            nick_name_controller.text ==
+                                user_data.value![UserManagement.get_user_name(
+                                  user_data.value!,
+                                )]["nickname"] &&
+                            gender_controller.text ==
+                                user_data.value![UserManagement.get_user_name(
+                                  user_data.value!,
+                                )]["gender"] &&
+                            age_controller.text ==
+                                user_data
+                                    .value![UserManagement.get_user_name(
+                                      user_data.value!,
+                                    )]["age"]
+                                    .toString() &&
+                            occupation_controller.text ==
+                                user_data.value![UserManagement.get_user_name(
+                                  user_data.value!,
+                                )]["occupation"] &&
+                            balance_controller.text ==
+                                user_data
+                                    .value![UserManagement.get_user_name(
+                                      user_data.value!,
+                                    )]["balance"]
+                                    .toString()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("No credentials changed"),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text("Change User Credentials"),
+                              content: Text(
+                                "Are you sure you want to change your credentials?",
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text("No"),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    try {
+                                      Map<String, dynamic> data = {
+                                        name_controller.text: {
+                                          "nickname": nick_name_controller.text,
+                                          "gender": gender_controller.text,
+                                          "age": int.parse(age_controller.text),
+                                          "occupation":
+                                              occupation_controller.text,
+                                          "balance": double.parse(
+                                            balance_controller.text,
+                                          ),
+                                        },
+                                      };
+                                      await UserManagement.save_user_data(data);
+                                      user_data.value =
+                                          await UserManagement.load_user_data();
+                                      overall_balance.value =
+                                          user_data
+                                              .value![UserManagement.get_user_name(
+                                            user_data.value!,
+                                          )]["balance"];
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MainPage(),
+                                        ),
+                                      );
+                                    } catch (error) {
+                                      print(error);
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            "Invalid age or balance input",
+                                          ),
+                                          behavior: SnackBarBehavior.floating,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Text("Yes"),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      },
                       child: Text("Confirm"),
                     ),
                   ),
