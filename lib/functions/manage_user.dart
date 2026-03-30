@@ -26,4 +26,8 @@ class UserManagement {
     user_signed_in.value = false;
     await preferences.remove("user_data");
   }
+
+  static String get_user_name(Map<String, dynamic> user) {
+    return user_data.value!.keys.toList()[0];
+  }
 }

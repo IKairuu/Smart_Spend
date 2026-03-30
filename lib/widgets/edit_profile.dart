@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_spend/constants/cons_values.dart';
 import 'package:smart_spend/constants/notifier.dart';
+import 'package:smart_spend/functions/manage_user.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -10,6 +11,31 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  TextEditingController name_controller = TextEditingController(
+    text: UserManagement.get_user_name(user_data.value!),
+  );
+  TextEditingController nick_name_controller = TextEditingController(
+    text: user_data
+        .value![UserManagement.get_user_name(user_data.value!)]["nickname"],
+  );
+  TextEditingController gender_controller = TextEditingController(
+    text: user_data
+        .value![UserManagement.get_user_name(user_data.value!)]["gender"],
+  );
+  TextEditingController age_controller = TextEditingController(
+    text: user_data
+        .value![UserManagement.get_user_name(user_data.value!)]["age"]
+        .toString(),
+  );
+  TextEditingController occupation_controller = TextEditingController(
+    text: user_data
+        .value![UserManagement.get_user_name(user_data.value!)]["occupation"],
+  );
+  TextEditingController balance_controller = TextEditingController(
+    text: user_data
+        .value![UserManagement.get_user_name(user_data.value!)]["balance"]
+        .toString(),
+  );
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -68,13 +94,19 @@ class _EditProfileState extends State<EditProfile> {
                       Container(
                         width: 155,
                         height: 40,
-                        child: TextField(decoration: SettingDesign.text_fields),
+                        child: TextField(
+                          controller: name_controller,
+                          decoration: SettingDesign.text_fields,
+                        ),
                       ),
                       SizedBox(width: 37),
                       Container(
                         width: 155,
                         height: 40,
-                        child: TextField(decoration: SettingDesign.text_fields),
+                        child: TextField(
+                          controller: nick_name_controller,
+                          decoration: SettingDesign.text_fields,
+                        ),
                       ),
                     ],
                   ),
@@ -109,6 +141,7 @@ class _EditProfileState extends State<EditProfile> {
                             width: 155,
                             height: 40,
                             child: DropdownMenu(
+                              controller: gender_controller,
                               inputDecorationTheme: InputDecorationTheme(
                                 filled: true,
                                 fillColor: dark
@@ -147,6 +180,7 @@ class _EditProfileState extends State<EditProfile> {
                             width: 155,
                             height: 40,
                             child: TextField(
+                              controller: age_controller,
                               decoration: SettingDesign.text_fields,
                             ),
                           ),
@@ -183,6 +217,7 @@ class _EditProfileState extends State<EditProfile> {
                         width: 155,
                         height: 40,
                         child: DropdownMenu(
+                          controller: occupation_controller,
                           inputDecorationTheme: InputDecorationTheme(
                             filled: true,
                             fillColor: dark
@@ -220,7 +255,10 @@ class _EditProfileState extends State<EditProfile> {
                       Container(
                         width: 155,
                         height: 40,
-                        child: TextField(decoration: SettingDesign.text_fields),
+                        child: TextField(
+                          controller: balance_controller,
+                          decoration: SettingDesign.text_fields,
+                        ),
                       ),
                     ],
                   ),
