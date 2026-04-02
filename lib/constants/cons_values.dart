@@ -244,11 +244,32 @@ class ColorContainer {
 }
 
 class SettingDesign {
+  static TextStyle setting_labels = TextStyle(color: Colors.white);
+  static Color alert_background_color = Color.fromRGBO(38, 38, 36, 1);
   static InputDecoration text_fields = InputDecoration(
-    fillColor: dark_mode.value
-        ? Color.fromRGBO(46, 46, 46, 1)
-        : ColorContainer.setting_light_color,
+    fillColor: Color.fromRGBO(46, 46, 46, 1),
     filled: true,
-    border: OutlineInputBorder(),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.white),
+    ),
   );
+  static InputDecorationTheme dropdown_decoration = InputDecorationTheme(
+    filled: true,
+    fillColor: Color.fromRGBO(46, 46, 46, 1),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.white),
+    ),
+    suffixIconColor: Colors.white,
+    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+    constraints: BoxConstraints.tight(Size.fromHeight(40)),
+  );
+  static TextStyle textfield_input_style = TextStyle(color: Colors.white);
+  static Color profile_border = Color.fromRGBO(105, 107, 108, 1);
+  static Color profile_background = Color.fromRGBO(48, 48, 46, 1);
+  static Color setting_background = Color.fromRGBO(38, 38, 36, 1);
+  static Color confirm_button = Color.fromRGBO(73, 57, 113, 1);
+  static Color button_foreground_color = Colors.white;
+  static Color icon_color = Colors.white;
+  static Color dropdown_fillcolor = Color.fromRGBO(46, 46, 46, 1);
+  static TextStyle dropdown_textstyle = TextStyle(color: Colors.white);
 }

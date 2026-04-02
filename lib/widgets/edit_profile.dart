@@ -49,49 +49,41 @@ class _EditProfileState extends State<EditProfile> {
             width: 500,
             height: 360,
             decoration: BoxDecoration(
-              color: dark
-                  ? ColorContainer.setting_section_background
-                  : ColorContainer.stats_main_color,
-              border: BoxBorder.all(
-                color: dark
-                    ? ColorContainer.setting_light_color
-                    : ColorContainer.setting_section_background,
-              ),
+              color: SettingDesign.profile_background,
+
+              border: BoxBorder.all(color: SettingDesign.profile_border),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 10),
-                  child: Row(
-                    children: [
-                      Icon(Icons.person_pin_rounded),
-                      SizedBox(width: 5),
-                      Text("EDIT PROFILE"),
-                    ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, left: 10),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.person_pin_rounded,
+                          color: SettingDesign.icon_color,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          "EDIT PROFILE",
+                          style: SettingDesign.setting_labels,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Divider(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 10),
-                  child: Row(
+                  Divider(),
+                  Row(
                     children: [
-                      Text(
-                        "Name",
-                        style: TextStyleDisplay.settings_profile_labels,
-                      ),
+                      Text("Name", style: SettingDesign.setting_labels),
                       SizedBox(width: 155),
-                      Text(
-                        "Nickname",
-                        style: TextStyleDisplay.settings_profile_labels,
-                      ),
+                      Text("Nickname", style: SettingDesign.setting_labels),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 10),
-                  child: Row(
+                  Row(
                     children: [
                       Container(
                         width: 155,
@@ -99,6 +91,7 @@ class _EditProfileState extends State<EditProfile> {
                         child: TextField(
                           controller: name_controller,
                           decoration: SettingDesign.text_fields,
+                          style: SettingDesign.textfield_input_style,
                         ),
                       ),
                       SizedBox(width: 37),
@@ -108,55 +101,35 @@ class _EditProfileState extends State<EditProfile> {
                         child: TextField(
                           controller: nick_name_controller,
                           decoration: SettingDesign.text_fields,
+                          style: SettingDesign.textfield_input_style,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 10),
-                      child: Row(
+
+                  Row(
+                    children: [
+                      Row(
                         children: [
-                          Text(
-                            "Gender",
-                            style: TextStyleDisplay.settings_profile_labels,
-                          ),
+                          Text("Gender", style: SettingDesign.setting_labels),
                           SizedBox(width: 145),
-                          Text(
-                            "Age",
-                            style: TextStyleDisplay.settings_profile_labels,
-                          ),
+                          Text("Age", style: SettingDesign.setting_labels),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10, left: 10),
-                      child: Row(
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Row(
                         children: [
                           Container(
                             width: 155,
                             height: 40,
                             child: DropdownMenu(
+                              textStyle: SettingDesign.dropdown_textstyle,
                               controller: gender_controller,
-                              inputDecorationTheme: InputDecorationTheme(
-                                filled: true,
-                                fillColor: dark
-                                    ? Color.fromRGBO(46, 46, 46, 1)
-                                    : ColorContainer.setting_light_color,
-                                border: OutlineInputBorder(),
-                                contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                ),
-                                constraints: BoxConstraints.tight(
-                                  Size.fromHeight(40),
-                                ),
-                              ),
+                              inputDecorationTheme:
+                                  SettingDesign.dropdown_decoration,
                               trailingIcon: Icon(
                                 Icons.arrow_drop_down_circle,
                                 size: 20,
@@ -184,55 +157,38 @@ class _EditProfileState extends State<EditProfile> {
                             child: TextField(
                               controller: age_controller,
                               decoration: SettingDesign.text_fields,
+                              style: SettingDesign.textfield_input_style,
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        "Occupation",
-                        style: TextStyleDisplay.settings_profile_labels,
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Text("Occupation", style: SettingDesign.setting_labels),
+
+                      SizedBox(width: 105),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          "Balance",
+                          style: SettingDesign.setting_labels,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 105),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        "Balance",
-                        style: TextStyleDisplay.settings_profile_labels,
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 10),
-                  child: Row(
+                    ],
+                  ),
+                  Row(
                     children: [
                       Container(
                         width: 155,
                         height: 40,
                         child: DropdownMenu(
+                          textStyle: SettingDesign.dropdown_textstyle,
                           controller: occupation_controller,
-                          inputDecorationTheme: InputDecorationTheme(
-                            filled: true,
-                            fillColor: dark
-                                ? Color.fromRGBO(46, 46, 46, 1)
-                                : ColorContainer.setting_light_color,
-                            border: OutlineInputBorder(),
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                            ),
-                            constraints: BoxConstraints.tight(
-                              Size.fromHeight(40),
-                            ),
-                          ),
+                          inputDecorationTheme:
+                              SettingDesign.dropdown_decoration,
                           trailingIcon: Icon(
                             Icons.arrow_drop_down_circle,
                             size: 20,
@@ -253,28 +209,23 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                       ),
                       SizedBox(width: 37),
-                      Text(""),
                       Container(
                         width: 155,
                         height: 40,
                         child: TextField(
                           controller: balance_controller,
                           decoration: SettingDesign.text_fields,
+                          style: SettingDesign.textfield_input_style,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: SizedBox(
+                  SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: dark
-                            ? ColorContainer.main_containers_indicator
-                            : ColorContainer.main_containers_light,
-                        foregroundColor: dark ? Colors.white : Colors.black,
+                        backgroundColor: SettingDesign.confirm_button,
+                        foregroundColor: SettingDesign.button_foreground_color,
                       ),
                       onPressed: () {
                         if (name_controller.text.trim().isEmpty ||
@@ -390,8 +341,8 @@ class _EditProfileState extends State<EditProfile> {
                       child: Text("Confirm"),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

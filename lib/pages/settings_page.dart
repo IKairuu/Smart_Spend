@@ -25,7 +25,9 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (context, dark, child) {
         return Scaffold(
           appBar: AppBar(
+            backgroundColor: Color.fromRGBO(23, 27, 30, 1),
             leading: BackButton(
+              color: Colors.white,
               onPressed: () {
                 setState(() {
                   Navigator.push(
@@ -35,31 +37,42 @@ class _SettingsPageState extends State<SettingsPage> {
                 });
               },
             ),
-            title: Text("Settings"),
+            title: Text("Settings", style: SettingDesign.setting_labels),
           ),
-          body: SingleChildScrollView(
+          body: Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+              color: ColorContainer.setting_section_background,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10, bottom: 5, top: 10),
-                  child: Text("PREFERENCES"),
+                  child: Text(
+                    "PREFERENCES",
+                    style: SettingDesign.setting_labels,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Row(
                     children: [
-                      Icon(Icons.dark_mode_sharp),
+                      Icon(Icons.dark_mode_sharp, color: Colors.white),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(4),
                           child: SwitchListTile.adaptive(
                             title: Text(
                               "Dark Mode",
-                              style: TextStyleDisplay.settings_font,
+                              style: SettingDesign.setting_labels,
                             ),
-                            subtitle: Text("Switch App appearance"),
+                            subtitle: Text(
+                              "Switch App appearance",
+                              style: SettingDesign.setting_labels,
+                            ),
                             value: dark,
                             onChanged: (value) async {
                               final SharedPreferences preference =
@@ -71,22 +84,11 @@ class _SettingsPageState extends State<SettingsPage> {
                               setState(() {
                                 dark_mode.value = value;
                                 if (value) {
-                                  SettingDesign.text_fields = InputDecoration(
-                                    fillColor: Color.fromRGBO(46, 46, 46, 1),
-                                    filled: true,
-                                    border: OutlineInputBorder(),
-                                  );
                                   container_colors.value = BoxDecoration(
                                     color: ColorContainer.main_containers_dark,
                                     borderRadius: BorderRadius.circular(20),
                                   );
                                 } else {
-                                  SettingDesign.text_fields = InputDecoration(
-                                    fillColor:
-                                        ColorContainer.setting_light_color,
-                                    filled: true,
-                                    border: OutlineInputBorder(),
-                                  );
                                   container_colors.value = BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(20),
@@ -102,26 +104,34 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, bottom: 5, top: 10),
-                  child: Text("DANGER ZONES"),
+                  child: Text(
+                    "DANGER ZONES",
+                    style: SettingDesign.setting_labels,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Row(
                     children: [
-                      Icon(FontAwesomeIcons.trashCan),
+                      Icon(FontAwesomeIcons.trashCan, color: Colors.white),
                       Expanded(
                         child: ListTile(
                           title: Text(
                             "Delete Data",
                             style: TextStyleDisplay.clear_data_font,
                           ),
-                          subtitle: Text("Clear All Data"),
+                          subtitle: Text(
+                            "Clear All Data",
+                            style: SettingDesign.setting_labels,
+                          ),
                           trailing: ElevatedButton.icon(
                             onPressed: () {
                               setState(() {
                                 showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
+                                    backgroundColor:
+                                        SettingDesign.alert_background_color,
                                     title: Text("Clear All Data"),
                                     content: Text(
                                       "Clear Data? All data will be deleted permanently.",
@@ -199,7 +209,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, bottom: 5, top: 10),
-                  child: Text("PROFILE"),
+                  child: Text("PROFILE", style: SettingDesign.setting_labels),
                 ),
                 EditProfile(),
               ],
