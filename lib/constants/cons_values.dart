@@ -246,12 +246,14 @@ class ColorContainer {
 class SettingDesign {
   static TextStyle setting_labels = TextStyle(color: Colors.white);
   static Color alert_background_color = Color.fromRGBO(38, 38, 36, 1);
-  static InputDecoration text_fields = InputDecoration(
-    fillColor: Color.fromRGBO(46, 46, 46, 1),
-    filled: true,
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.white),
-    ),
+  static Color textField_fillcolor = Color.fromRGBO(46, 46, 46, 1);
+  static bool textField_filled = true;
+  static OutlineInputBorder textField_enabled_border = OutlineInputBorder(
+    borderSide: BorderSide(color: Colors.white),
+  );
+  static OutlineInputBorder textField_focused_border = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(20),
+    borderSide: BorderSide(color: Colors.white),
   );
   static InputDecorationTheme dropdown_decoration = InputDecorationTheme(
     filled: true,
@@ -259,10 +261,12 @@ class SettingDesign {
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide(color: Colors.white),
     ),
+    focusedBorder: SettingDesign.textField_focused_border,
     suffixIconColor: Colors.white,
     contentPadding: const EdgeInsets.symmetric(horizontal: 10),
     constraints: BoxConstraints.tight(Size.fromHeight(40)),
   );
+  static const double text_field_spacing = 10;
   static TextStyle textfield_input_style = TextStyle(color: Colors.white);
   static Color profile_border = Color.fromRGBO(105, 107, 108, 1);
   static Color profile_background = Color.fromRGBO(48, 48, 46, 1);

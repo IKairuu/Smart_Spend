@@ -44,17 +44,24 @@ class _EditProfileState extends State<EditProfile> {
       valueListenable: dark_mode,
       builder: (context, dark, child) {
         return Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+          padding: const EdgeInsets.only(
+            left: 10,
+            right: 10,
+            top: 5,
+            bottom: 5,
+          ),
           child: Container(
-            width: 500,
-            height: 360,
+            width: double.infinity,
             decoration: BoxDecoration(
               color: SettingDesign.profile_background,
 
               border: BoxBorder.all(color: SettingDesign.profile_border),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.only(
+                left: SettingDesign.text_field_spacing,
+                right: SettingDesign.text_field_spacing,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,149 +83,217 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                   ),
                   Divider(),
-                  Row(
-                    children: [
-                      Text("Name", style: SettingDesign.setting_labels),
-                      SizedBox(width: 155),
-                      Text("Nickname", style: SettingDesign.setting_labels),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        width: 155,
-                        height: 40,
-                        child: TextField(
-                          controller: name_controller,
-                          decoration: SettingDesign.text_fields,
-                          style: SettingDesign.textfield_input_style,
-                        ),
-                      ),
-                      SizedBox(width: 37),
-                      Container(
-                        width: 155,
-                        height: 40,
-                        child: TextField(
-                          controller: nick_name_controller,
-                          decoration: SettingDesign.text_fields,
-                          style: SettingDesign.textfield_input_style,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  Row(
-                    children: [
-                      Row(
-                        children: [
-                          Text("Gender", style: SettingDesign.setting_labels),
-                          SizedBox(width: 145),
-                          Text("Age", style: SettingDesign.setting_labels),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 155,
-                            height: 40,
-                            child: DropdownMenu(
-                              textStyle: SettingDesign.dropdown_textstyle,
-                              controller: gender_controller,
-                              inputDecorationTheme:
-                                  SettingDesign.dropdown_decoration,
-                              trailingIcon: Icon(
-                                Icons.arrow_drop_down_circle,
-                                size: 20,
-                              ),
-
-                              dropdownMenuEntries: [
-                                for (
-                                  int index = 0;
-                                  index < WelcomePageValues.genders.length;
-                                  index++
-                                )
-                                  DropdownMenuEntry(
-                                    value: WelcomePageValues.gender_code[index],
-                                    label: WelcomePageValues.genders[index],
-                                    leadingIcon:
-                                        WelcomePageValues.gender_icon[index],
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: SettingDesign.text_field_spacing,
+                      bottom: SettingDesign.text_field_spacing,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              right: SettingDesign.text_field_spacing,
+                            ),
+                            child: SizedBox(
+                              height: 40,
+                              child: TextField(
+                                controller: name_controller,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Name",
+                                    style: SettingDesign.textfield_input_style,
                                   ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(width: 37),
-                          Container(
-                            width: 155,
-                            height: 40,
-                            child: TextField(
-                              controller: age_controller,
-                              decoration: SettingDesign.text_fields,
-                              style: SettingDesign.textfield_input_style,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Text("Occupation", style: SettingDesign.setting_labels),
-
-                      SizedBox(width: 105),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          "Balance",
-                          style: SettingDesign.setting_labels,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        width: 155,
-                        height: 40,
-                        child: DropdownMenu(
-                          textStyle: SettingDesign.dropdown_textstyle,
-                          controller: occupation_controller,
-                          inputDecorationTheme:
-                              SettingDesign.dropdown_decoration,
-                          trailingIcon: Icon(
-                            Icons.arrow_drop_down_circle,
-                            size: 20,
-                          ),
-
-                          dropdownMenuEntries: [
-                            for (
-                              int index = 0;
-                              index < WelcomePageValues.genders.length;
-                              index++
-                            )
-                              DropdownMenuEntry(
-                                value:
-                                    WelcomePageValues.occupations_code[index],
-                                label: WelcomePageValues.occupations[index],
+                                  filled: SettingDesign.textField_filled,
+                                  fillColor: SettingDesign.textField_fillcolor,
+                                  enabledBorder:
+                                      SettingDesign.textField_enabled_border,
+                                  focusedBorder:
+                                      SettingDesign.textField_focused_border,
+                                ),
+                                style: SettingDesign.textfield_input_style,
                               ),
-                          ],
+                            ),
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 37),
-                      Container(
-                        width: 155,
-                        height: 40,
-                        child: TextField(
-                          controller: balance_controller,
-                          decoration: SettingDesign.text_fields,
-                          style: SettingDesign.textfield_input_style,
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: SettingDesign.text_field_spacing,
+                            ),
+                            child: SizedBox(
+                              height: 40,
+                              child: TextField(
+                                controller: nick_name_controller,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Nickname",
+                                    style: SettingDesign.textfield_input_style,
+                                  ),
+                                  filled: SettingDesign.textField_filled,
+                                  fillColor: SettingDesign.textField_fillcolor,
+                                  enabledBorder:
+                                      SettingDesign.textField_enabled_border,
+                                  focusedBorder:
+                                      SettingDesign.textField_focused_border,
+                                ),
+                                style: SettingDesign.textfield_input_style,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: SettingDesign.text_field_spacing,
+                      bottom: SettingDesign.text_field_spacing,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              right: SettingDesign.text_field_spacing,
+                            ),
+                            child: SizedBox(
+                              height: 40,
+                              child: DropdownMenu(
+                                textStyle: SettingDesign.dropdown_textstyle,
+                                controller: gender_controller,
+                                inputDecorationTheme:
+                                    SettingDesign.dropdown_decoration,
+                                label: Text(
+                                  "Gender",
+                                  style: SettingDesign.textfield_input_style,
+                                ),
+                                trailingIcon: Icon(
+                                  Icons.arrow_drop_down_circle,
+                                  size: 20,
+                                ),
+
+                                dropdownMenuEntries: [
+                                  for (
+                                    int index = 0;
+                                    index < WelcomePageValues.genders.length;
+                                    index++
+                                  )
+                                    DropdownMenuEntry(
+                                      value:
+                                          WelcomePageValues.gender_code[index],
+                                      label: WelcomePageValues.genders[index],
+                                      leadingIcon:
+                                          WelcomePageValues.gender_icon[index],
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: SettingDesign.text_field_spacing,
+                            ),
+                            child: SizedBox(
+                              height: 40,
+                              child: TextField(
+                                controller: age_controller,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Age",
+                                    style: SettingDesign.textfield_input_style,
+                                  ),
+                                  filled: SettingDesign.textField_filled,
+                                  fillColor: SettingDesign.textField_fillcolor,
+                                  enabledBorder:
+                                      SettingDesign.textField_enabled_border,
+                                  focusedBorder:
+                                      SettingDesign.textField_focused_border,
+                                ),
+                                style: SettingDesign.textfield_input_style,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: SettingDesign.text_field_spacing,
+                      bottom: SettingDesign.text_field_spacing,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              right: SettingDesign.text_field_spacing,
+                            ),
+                            child: SizedBox(
+                              height: 40,
+                              child: DropdownMenu(
+                                textStyle: SettingDesign.dropdown_textstyle,
+                                controller: occupation_controller,
+                                inputDecorationTheme:
+                                    SettingDesign.dropdown_decoration,
+                                label: Text(
+                                  "Occupations",
+                                  style: SettingDesign.textfield_input_style,
+                                ),
+                                trailingIcon: Icon(
+                                  Icons.arrow_drop_down_circle,
+                                  size: 20,
+                                ),
+
+                                dropdownMenuEntries: [
+                                  for (
+                                    int index = 0;
+                                    index <
+                                        WelcomePageValues.occupations.length;
+                                    index++
+                                  )
+                                    DropdownMenuEntry(
+                                      value: WelcomePageValues
+                                          .occupations_code[index],
+                                      label:
+                                          WelcomePageValues.occupations[index],
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: SettingDesign.text_field_spacing,
+                            ),
+                            child: SizedBox(
+                              height: 40,
+                              child: TextField(
+                                controller: balance_controller,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    "Balance",
+                                    style: SettingDesign.textfield_input_style,
+                                  ),
+                                  filled: SettingDesign.textField_filled,
+                                  fillColor: SettingDesign.textField_fillcolor,
+                                  enabledBorder:
+                                      SettingDesign.textField_enabled_border,
+                                  focusedBorder:
+                                      SettingDesign.textField_focused_border,
+                                ),
+                                style: SettingDesign.textfield_input_style,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     width: double.infinity,

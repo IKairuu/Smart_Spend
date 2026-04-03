@@ -45,174 +45,183 @@ class _SettingsPageState extends State<SettingsPage> {
             decoration: BoxDecoration(
               color: ColorContainer.setting_section_background,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, bottom: 5, top: 10),
-                  child: Text(
-                    "PREFERENCES",
-                    style: SettingDesign.setting_labels,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      bottom: 5,
+                      top: 10,
+                    ),
+                    child: Text(
+                      "PREFERENCES",
+                      style: SettingDesign.setting_labels,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Row(
-                    children: [
-                      Icon(Icons.dark_mode_sharp, color: Colors.white),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(4),
-                          child: SwitchListTile.adaptive(
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      children: [
+                        Icon(Icons.dark_mode_sharp, color: Colors.white),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(4),
+                            child: SwitchListTile.adaptive(
+                              title: Text(
+                                "Dark Mode",
+                                style: SettingDesign.setting_labels,
+                              ),
+                              subtitle: Text(
+                                "Switch App appearance",
+                                style: SettingDesign.setting_labels,
+                              ),
+                              value: dark,
+                              onChanged: (value) async {
+                                final SharedPreferences preference =
+                                    await SharedPreferences.getInstance();
+                                await preference.setBool(
+                                  Settings.dark_mode,
+                                  value,
+                                );
+                                setState(() {
+                                  dark_mode.value = value;
+                                  if (value) {
+                                    container_colors.value = BoxDecoration(
+                                      color:
+                                          ColorContainer.main_containers_dark,
+                                      borderRadius: BorderRadius.circular(20),
+                                    );
+                                  } else {
+                                    container_colors.value = BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                    );
+                                  }
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      bottom: 5,
+                      top: 10,
+                    ),
+                    child: Text(
+                      "DANGER ZONES",
+                      style: SettingDesign.setting_labels,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      children: [
+                        Icon(FontAwesomeIcons.trashCan, color: Colors.white),
+                        Expanded(
+                          child: ListTile(
                             title: Text(
-                              "Dark Mode",
-                              style: SettingDesign.setting_labels,
+                              "Delete Data",
+                              style: TextStyleDisplay.clear_data_font,
                             ),
                             subtitle: Text(
-                              "Switch App appearance",
+                              "Clear All Data",
                               style: SettingDesign.setting_labels,
                             ),
-                            value: dark,
-                            onChanged: (value) async {
-                              final SharedPreferences preference =
-                                  await SharedPreferences.getInstance();
-                              await preference.setBool(
-                                Settings.dark_mode,
-                                value,
-                              );
-                              setState(() {
-                                dark_mode.value = value;
-                                if (value) {
-                                  container_colors.value = BoxDecoration(
-                                    color: ColorContainer.main_containers_dark,
-                                    borderRadius: BorderRadius.circular(20),
-                                  );
-                                } else {
-                                  container_colors.value = BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                  );
-                                }
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, bottom: 5, top: 10),
-                  child: Text(
-                    "DANGER ZONES",
-                    style: SettingDesign.setting_labels,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Row(
-                    children: [
-                      Icon(FontAwesomeIcons.trashCan, color: Colors.white),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Delete Data",
-                            style: TextStyleDisplay.clear_data_font,
-                          ),
-                          subtitle: Text(
-                            "Clear All Data",
-                            style: SettingDesign.setting_labels,
-                          ),
-                          trailing: ElevatedButton.icon(
-                            onPressed: () {
-                              setState(() {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    backgroundColor:
-                                        SettingDesign.alert_background_color,
-                                    title: Text("Clear All Data"),
-                                    content: Text(
-                                      "Clear Data? All data will be deleted permanently.",
-                                    ),
-                                    actionsAlignment: MainAxisAlignment.end,
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: Text("No"),
+                            trailing: ElevatedButton.icon(
+                              onPressed: () {
+                                setState(() {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      backgroundColor:
+                                          SettingDesign.alert_background_color,
+                                      title: Text("Clear All Data"),
+                                      content: Text(
+                                        "Clear Data? All data will be deleted permanently.",
                                       ),
-                                      TextButton(
-                                        onPressed: () async {
-                                          await AppDatabase.clear_expenses_data();
-                                          await AppDatabase.clear_memo_data();
-                                          await UserManagement.clear_user_data();
-                                          setState(() {
-                                            expenses_data.value =
-                                                AppDatabase.get_data();
-                                            memos.value =
-                                                AppDatabase.get_memo_data();
-                                            dark_mode.value = false;
-                                            container_colors.value =
-                                                BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                );
-                                            SettingDesign.text_fields =
-                                                InputDecoration(
-                                                  fillColor: ColorContainer
-                                                      .setting_light_color,
-                                                  filled: true,
-                                                  border: OutlineInputBorder(),
-                                                );
-                                            current_main_widget.value = 0;
-                                            current_welcome_widget.value = 0;
-                                            AppDatabase.refresh_data();
-                                            AppDatabase.refresh_notifiers();
-                                            AppDatabase.calculate_all_display();
-                                            AppDatabase.calculate_overall();
-                                          });
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  WidgetTree(),
-                                            ),
-                                          );
-                                        },
-                                        child: Text(
-                                          "Yes",
-                                          style: TextStyle(color: Colors.red),
+                                      actionsAlignment: MainAxisAlignment.end,
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: Text("No"),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  barrierDismissible: true,
-                                );
-                              });
-                            },
-                            label: Icon(FontAwesomeIcons.trash),
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll(
-                                Colors.red,
-                              ),
-                              foregroundColor: WidgetStatePropertyAll(
-                                Colors.black,
+                                        TextButton(
+                                          onPressed: () async {
+                                            await AppDatabase.clear_expenses_data();
+                                            await AppDatabase.clear_memo_data();
+                                            await UserManagement.clear_user_data();
+                                            setState(() {
+                                              expenses_data.value =
+                                                  AppDatabase.get_data();
+                                              memos.value =
+                                                  AppDatabase.get_memo_data();
+                                              dark_mode.value = false;
+                                              container_colors
+                                                  .value = BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              );
+                                              current_main_widget.value = 0;
+                                              current_welcome_widget.value = 0;
+                                              AppDatabase.refresh_data();
+                                              AppDatabase.refresh_notifiers();
+                                              AppDatabase.calculate_all_display();
+                                              AppDatabase.calculate_overall();
+                                            });
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    WidgetTree(),
+                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            "Yes",
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    barrierDismissible: true,
+                                  );
+                                });
+                              },
+                              label: Icon(FontAwesomeIcons.trash),
+                              style: ButtonStyle(
+                                backgroundColor: WidgetStatePropertyAll(
+                                  Colors.red,
+                                ),
+                                foregroundColor: WidgetStatePropertyAll(
+                                  Colors.black,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, bottom: 5, top: 10),
-                  child: Text("PROFILE", style: SettingDesign.setting_labels),
-                ),
-                EditProfile(),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      bottom: 5,
+                      top: 10,
+                    ),
+                    child: Text("PROFILE", style: SettingDesign.setting_labels),
+                  ),
+                  EditProfile(),
+                ],
+              ),
             ),
           ),
         );
