@@ -25,12 +25,12 @@ class _AddMemoState extends State<AddMemo> {
             valueListenable: container_colors,
             builder: (context, decorate, child) {
               return Container(
-                height: 285,
                 width: double.infinity,
                 decoration: decorate,
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [

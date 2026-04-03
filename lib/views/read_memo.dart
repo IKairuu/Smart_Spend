@@ -21,10 +21,10 @@ class _ReadMemoState extends State<ReadMemo> {
             valueListenable: container_colors,
             builder: (context, decorate, child) {
               return Container(
-                height: 285,
                 width: double.infinity,
                 decoration: decorate,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ValueListenableBuilder(
                       valueListenable: selected_memo_title,

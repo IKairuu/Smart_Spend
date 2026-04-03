@@ -22,10 +22,10 @@ class _RemoveMemoState extends State<RemoveMemo> {
             valueListenable: container_colors,
             builder: (context, decorate, child) {
               return Container(
-                height: 285,
                 width: double.infinity,
                 decoration: decorate,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ValueListenableBuilder(
                       valueListenable: memo_check_data,
