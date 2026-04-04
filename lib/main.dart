@@ -58,6 +58,12 @@ class _MyAppState extends State<MyApp> {
       default:
         user_signed_in.value = true;
         overall_balance.value = user_data.value![key]["balance"];
+        expenses_data.value = AppDatabase.get_data();
+        memos.value = AppDatabase.get_memo_data();
+        memo_check_data.value = AppDatabase.generate_check_box_memo();
+        AppDatabase.calculate_all_display();
+        AppDatabase.calculate_overall();
+        AppDatabase.refresh_data();
         break;
     }
   }
