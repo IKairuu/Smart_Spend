@@ -73,12 +73,19 @@ class _ReadMemoState extends State<ReadMemo> {
                           padding: const EdgeInsets.all(10),
                           child: Container(
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
+                              border: Border.all(
+                                color: dark ? Colors.white : Colors.black,
+                              ),
                             ),
                             height: 180,
                             width: double.infinity,
                             child: Scrollbar(
-                              child: SingleChildScrollView(child: Text(value)),
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5),
+                                  child: Text(value),
+                                ),
+                              ),
                             ),
                           ),
                         );

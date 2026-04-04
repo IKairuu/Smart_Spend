@@ -19,46 +19,20 @@ class _AddMemoState extends State<AddMemo> {
     return ValueListenableBuilder(
       valueListenable: dark_mode,
       builder: (context, dark, child) {
-        return Padding(
-          padding: const EdgeInsets.only(left: 15, right: 15),
-          child: ValueListenableBuilder(
-            valueListenable: container_colors,
-            builder: (context, decorate, child) {
-              return Container(
-                width: double.infinity,
-                decoration: decorate,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text("TITLE: "),
-                          Expanded(
-                            child: Container(
-                              height: 40,
-                              child: TextField(
-                                controller: title,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Center(child: Text("CONTENT")),
-                      ),
-                      Container(
-                        height: 140,
+        return SizedBox(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text("TITLE: "),
+                    Expanded(
+                      child: SizedBox(
+                        height: 40,
                         child: TextField(
-                          controller: content,
-                          maxLines: 5,
+                          controller: title,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -66,68 +40,85 @@ class _AddMemoState extends State<AddMemo> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (title.text.trim().isEmpty ||
-                                content.text.trim().isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    "Title and Content is required",
-                                  ),
-                                  behavior: SnackBarBehavior.floating,
-                                ),
-                              );
-                            } else if (AppDatabase.identify_duplicates(
-                              title.text,
-                              false,
-                            )) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("Title already exists."),
-                                  behavior: SnackBarBehavior.floating,
-                                ),
-                              );
-                            } else {
-                              AppDatabase.add_memo_data(
-                                MemoFunc(
-                                  title: title.text,
-                                  text: content.text,
-                                  date: DateTime.now(),
-                                ),
-                              );
-                              memos.value = AppDatabase.get_memo_data();
-                              memo_check_data.value =
-                                  AppDatabase.generate_check_box_memo();
-
-                              title.clear();
-                              content.clear();
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: dark
-                                ? ColorContainer.main_containers_indicator
-                                : ColorContainer.main_containers_light,
-                            minimumSize: Size(double.infinity, 40),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadiusGeometry.circular(20),
-                            ),
-                          ),
-                          child: Text(
-                            "Confirm",
-                            style: TextStyle(
-                              color: dark ? Colors.white : Colors.black,
-                            ),
-                          ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Center(child: Text("CONTENT")),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    child: TextField(
+                      controller: content,
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              );
-            },
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (title.text.trim().isEmpty ||
+                            content.text.trim().isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Title and Content is required"),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        } else if (AppDatabase.identify_duplicates(
+                          title.text,
+                          false,
+                        )) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Title already exists."),
+                              behavior: SnackBarBehavior.floating,
+                            ),
+                          );
+                        } else {
+                          AppDatabase.add_memo_data(
+                            MemoFunc(
+                              title: title.text,
+                              text: content.text,
+                              date: DateTime.now(),
+                            ),
+                          );
+                          memos.value = AppDatabase.get_memo_data();
+                          memo_check_data.value =
+                              AppDatabase.generate_check_box_memo();
+
+                          title.clear();
+                          content.clear();
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: dark
+                            ? ColorContainer.main_containers_indicator
+                            : ColorContainer.main_containers_light,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(20),
+                        ),
+                      ),
+                      child: Text(
+                        "Confirm",
+                        style: TextStyle(
+                          color: dark ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
